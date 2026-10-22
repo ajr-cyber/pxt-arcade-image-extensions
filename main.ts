@@ -68,4 +68,62 @@ namespace images {
         return rotatedList;
     }
 
+
+    /**
+     * Rotates an image 90 degrees anticlockwise and returns the new rotated image.
+     * @param img The source image to rotate
+     */
+    //% blockId="images_rotate_90_anticlockwise"
+    //% block="rotate $img 90° anticlockwise"
+    //% img.shadow=image_picker
+    export function rotate90Anticlockwise(img: Image): Image {
+        if (!img) return null;
+
+        let oldWidth = img.width;
+        let oldHeight = img.height;
+
+        // Dimensions flip (e.g., 16x8 becomes 8x16)
+        let rotatedImg = image.create(oldHeight, oldWidth);
+
+        for (let srcX = 0; srcX < oldWidth; srcX++) {
+            for (let srcY = 0; srcY < oldHeight; srcY++) {
+                let color = img.getPixel(srcX, srcY);
+
+                // Formula for 90° anticlockwise rotation
+                let destX = srcY;
+                let destY = (oldWidth - 1) - srcX;
+
+                rotatedImg.setPixel(destX, destY, color);
+            }
+        }
+
+        return rotatedImg;
+    }
+
+    /**
+        * Takes an array of images, rotates each one 90 degrees anticlockwise, 
+        * and returns a new array containing the rotated images.
+        * @param list The array of images to rotate
+        */
+    //% blockId="images_rotate_array_90_anticlockwise"
+    //% block="rotate image array $list 90° anticlockwise"
+    //% list.shadow=variables_get
+    export function rotateImageArray90Anticlockwise(list: Image[]): Image[] {
+        if (!list) return [];
+
+        let rotatedList: Image[] = [];
+
+        for (let i = 0; i < list.length; i++) {
+            let currentImg = list[i];
+
+            // Calls the anticlockwise calculation written above
+            let rotatedImg = rotate90Anticlockwise(currentImg);
+
+            if (rotatedImg) {
+                rotatedList.push(rotatedImg);
+            }
+        }
+
+        return rotatedList;
+    }
 }
