@@ -56,11 +56,11 @@ namespace images {
             let currentImg = list[i];
 
             // Re-use your existing rotation logic for individual images
-            let rotatedImg = rotate90Clockwise(currentImg);
+            let rotatedImg2 = rotate90Clockwise(currentImg);
 
             // Push the newly created image into our output array
-            if (rotatedImg) {
-                rotatedList.push(rotatedImg);
+            if (rotatedImg2) {
+                rotatedList.push(rotatedImg2);
             }
         }
 
