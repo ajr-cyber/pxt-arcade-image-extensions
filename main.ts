@@ -126,4 +126,62 @@ namespace images {
 
         return rotatedList;
     }
+
+    /**
+     * Rotates an image 180 degrees and returns the new rotated image.
+     * @param img The source image to rotate
+     */
+    //% blockId="images_rotate_180"
+    //% block="rotate $img 180°"
+    //% img.shadow=image_picker
+    export function rotate180(img: Image): Image {
+        if (!img) return null;
+
+        let w = img.width;
+        let h = img.height;
+
+        // Dimensions stay exactly the same for a 180-degree rotation
+        let rotatedImg = image.create(w, h);
+
+        for (let srcX = 0; srcX < w; srcX++) {
+            for (let srcY = 0; srcY < h; srcY++) {
+                let color = img.getPixel(srcX, srcY);
+
+                // Formula to invert coordinates diagonally
+                let destX = (w - 1) - srcX;
+                let destY = (h - 1) - srcY;
+
+                rotatedImg.setPixel(destX, destY, color);
+            }
+        }
+
+        return rotatedImg;
+    }
+
+    /**
+     * Takes an array of images, rotates each one 180 degrees, 
+     * and returns a new array containing the rotated images.
+     * @param list The array of images to rotate
+     */
+    //% blockId="images_rotate_array_180"
+    //% block="rotate image array $list 180°"
+    //% list.shadow=variables_get
+    export function rotateImageArray180(list: Image[]): Image[] {
+        if (!list) return [];
+
+        let rotatedList: Image[] = [];
+
+        for (let i = 0; i < list.length; i++) {
+            let currentImg = list[i];
+
+            // Calls the 180-degree single image rotation function
+            let rotatedImg = rotate180(currentImg);
+
+            if (rotatedImg) {
+                rotatedList.push(rotatedImg);
+            }
+        }
+
+        return rotatedList;
+    }
 }
