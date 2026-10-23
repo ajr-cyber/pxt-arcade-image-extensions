@@ -184,4 +184,65 @@ namespace images {
 
         return rotatedList;
     }
+
+    /**
+     * Takes an array of images, flips each one horizontally, 
+     * and returns a new array containing the flipped images.
+     * @param list The array of images to flip horizontally
+     */
+    //% blockId="images_flip_array_horizontally"
+    //% block="flip image array $list horizontally"
+    //% list.shadow=variables_get
+    export function flipImageArrayHorizontally(list: Image[]): Image[] {
+        if (!list) return [];
+
+        let flippedList: Image[] = [];
+
+        for (let i = 0; i < list.length; i++) {
+            let currentImg = list[i];
+
+            if (currentImg) {
+                // 1. Create a clone so we don't overwrite the original source image
+                let clonedImg = currentImg.clone();
+
+                // 2. Use MakeCode's built-in image method to flip it horizontally
+                clonedImg.flipX();
+
+                // 3. Save it to our new array
+                flippedList.push(clonedImg);
+            }
+        }
+
+        return flippedList;
+    }
+
+    /**
+     * Takes an array of images, flips each one vertically, 
+     * and returns a new array containing the flipped images.
+     * @param list The array of images to flip vertically
+     */
+    //% blockId="images_flip_array_vertically"
+    //% block="flip image array $list vertically"
+    //% list.shadow=variables_get
+    export function flipImageArrayVertically(list: Image[]): Image[] {
+        if (!list) return [];
+
+        let flippedList: Image[] = [];
+
+        for (let i = 0; i < list.length; i++) {
+            let currentImg = list[i];
+
+            if (currentImg) {
+                // Clone the image layout so the original array values stay unchanged
+                let clonedImg = currentImg.clone();
+
+                // Use MakeCode's built-in image method to flip vertically
+                clonedImg.flipY();
+
+                flippedList.push(clonedImg);
+            }
+        }
+
+        return flippedList;
+    }
 }
